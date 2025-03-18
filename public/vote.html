@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vote</title>
+    <!--<link rel="stylesheet" href="style.css" />-->
+    <style>
+        * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background-color: #f4f4f9;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+    }
+
+    h1 {
+        font-size: 24px;
+        color: #333;
+        padding: 20px;
+        background-color: #ffffff;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 10;
+    }
+
+    /* Form Container Styling */
+    .form-container {
+        background-color: #000000b0;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        margin-top: 80px; /* Push down below the fixed header */
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        height: calc(100vh - 100px); /* Take remaining height after header */
+    }
+
+    /* Candidate List Styling */
+    #candidates {
+        overflow-y: auto;
+        flex-grow: 1; /* Allow the list to grow and scroll if needed */
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding-right: 5px;
+    }
+
+    /* Custom Scrollbar */
+    #candidates::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    #candidates::-webkit-scrollbar-thumb {
+        background-color: #ccc;
+        border-radius: 4px;
+    }
+
+    #candidates::-webkit-scrollbar-track {
+        background-color: #00ffd5;
+    }
+
+    label {
+        background-color: #b6b6b686;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #ffffff;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+
+    input[type="radio"] {
+        display: none;
+    }
+    label:has(input[type="radio"]:checked) {
+        background-color: #ffffff;
+        border-color: #000;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+        transform: scale(0.94,0.94);
+    }
+    input[type="radio"]:checked + img {
+        border: 2px solid #000;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    input[type="radio"]:checked + span::after {
+        content: "";
+        width: 12px;
+        height: 12px;
+        background-color: #000;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    input[type="radio"]:checked + span + span {
+        font-weight: bold;
+        color: #000;
+    }
+
+    input[type="radio"]:checked + span + span,
+    input[type="radio"]:checked + span {
+        border-color: #000;
+    }
+    label:hover {
+        background-color: #f0f0f0;
+    }
+
+    label:active {
+        background-color: #e2ff93;
+    }
+
+
+    label,
+    input[type="radio"] + span {
+        transition: all 0.2s ease;
+    }
+
+    .submit-btn {
+        background-color: #000000;
+        color: white;
+        border: none;
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        margin-top: 10px;
+        width:100%;
+
+    }
+
+    .submit-btn:hover {
+        background-color: #001aff;
+    }
+
+    .submit-btn:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+    </style>
+    <script src="vote.js" defer></script>
+</head>
+<body>
+    <h1>Vote</h1>
+    <div class="form-container">
+        <form id="voteForm">
+            <div id="candidates" class="candidates-list"></div>
+            <button type="button" onclick="submitVote()" class="submit-btn">
+                Submit Vote
+            </button>
+        </form>
+    </div>
+    <canvas id="dotCanvas" style="z-index: -1; display:block;position: fixed; user-select: none; background-color: bisque;"></canvas>
+    <script src="canvas.js"></script>
+</body>
+</html>

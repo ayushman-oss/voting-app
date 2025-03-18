@@ -1,0 +1,341 @@
+/* Global Styling */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f4;
+    margin: 0;
+    min-height: 100vh;
+}
+
+.login-container {
+    background-color: #00000094;
+    padding: 20px;
+    margin-right: 10px;
+    border-radius: 8px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    height: 90vh;
+    width: 100%;
+    max-width: 450px; /* Set a maximum width for larger screens */
+}
+
+label{
+    background-color:beige;
+    padding: 2%;
+    width: 95%;
+    max-width: 450px;
+    border-radius: 1%;
+    font-size: large;
+    font-family: 'Courier New', Courier, monospace;
+
+}
+/* Form Inputs */
+input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5%;
+    font-size: 16px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px;
+    border: none;
+    width: 90%;
+    cursor: pointer;
+    border-radius: 5%;
+}
+
+button[type="submit"] {
+    background: #000000;
+    color: white;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Centered Container */
+.container {
+    background: white;
+    width: 350px;
+    padding: 20px;
+    margin: 100px auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+.container-1 {
+    background-color: #00000094;
+    width: 350px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Button */
+.btn {
+    background: #007BFF;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #0056b3;
+}
+
+.admin-container {
+    width: 400px;
+    background: white;
+    padding: 20px;
+    margin: 50px auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.form-container {
+    margin-bottom: 20px;
+}
+
+.candidate-list {
+    text-align: left;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    padding: 10px;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.delete-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    width: auto;
+    height: auto;
+    cursor: pointer;
+    border-radius: 10%;
+}
+
+.delete-btn:hover {
+    background: darkred;
+}
+
+.preview {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 350px;
+    text-align: center;
+}
+
+#instructions-btn {
+    background: transparent;
+    color: #ffffff;
+    border: none;
+    margin-top: 10px;
+    font-size: large;
+}
+
+#close-instructions {
+    cursor: pointer;
+    background-color: #ff0000;
+    padding: 5%;
+}
+
+#instructions-btn:hover {
+    text-decoration: underline;
+}
+
+.help-box {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
+#help-btn {
+    background: #000000;
+    color: white;
+    padding: 10px;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.help-content {
+    display: none;
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+}
+
+/* Expand Help Content */
+.help-box.active .help-content {
+    display: block;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .login-container, .container, .admin-container {
+        width: 95%; 
+        margin: 20px auto;
+    }
+
+    input, button {
+        width: 90%; 
+        font-size: 14px;
+        background-color: #f4f4f4;
+    }
+
+    .modal-content {
+        width: 90%; 
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 20px;
+    }
+
+    .login-container {
+        padding: 15px;
+        height: auto; /* Allow height to adjust dynamically */
+    }
+
+    .help-box {
+        bottom: 10px; /* Move help box up a bit */
+        right: 10px;
+    }
+
+    .container, .admin-container {
+        width: 100%; /* Ensure container elements take up the full width on very small screens */
+        padding: 10px;
+    }
+
+    input, button {
+        padding: 12px; /* Increase padding for better touch interactions on mobile */
+        font-size: 16px;
+    }
+
+    .preview {
+        width: 100px; /* Reduce image size for smaller screens */
+        height: 100px;
+    }
+}
+.error {
+    color: red;
+    font-size: 0.9rem;
+}
+
+#captcha-section {
+    margin-top: 15px;
+}
+
+#captcha-display {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: inline-block;
+    padding: 5px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+}
+
+#captcha-input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+}
+/* Global Styling */
+input {
+    width: 90%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 10px; /* Rounded corners */
+    font-size: 16px;
+    border: 1px solid #ccc;
+    background-color: beige; /* Beige background */
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    border-color: blue; /* Blue border on focus */
+    outline: none; /* Remove the default outline */
+}
+
+/* Placeholder Styling */
+input::placeholder {
+    color: #888; /* Dark grey placeholder */
+}
+
+/* Placeholder positioning and style */
+input:focus::placeholder {
+    color: transparent; /* Make the placeholder text transparent when input is focused */
+}

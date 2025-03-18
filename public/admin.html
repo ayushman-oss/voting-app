@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="admin-container">
+        <h2>Admin Panel</h2>
+
+        <!-- Add Candidate Form -->
+        <div class="form-container">
+            <form id="add-candidate-form">
+                <input type="text" id="candidate-name" placeholder="Candidate Name" required>
+                <input type="file" id="candidate-symbol" accept="image/*" required>
+                <canvas id="image-canvas" style="display: none;"></canvas>
+                <img id="image-preview" class="preview" alt="Candidate Photo" style="display: none;">
+                <button type="submit" class="btn">Add Candidate</button>
+            </form>
+        </div>
+
+        <!-- Current Candidates -->
+        <div class="candidate-list">
+            <h3>Current Candidates</h3>
+            <ul id="candidate-display"></ul>
+        </div>
+    </div>
+    <canvas id="dotCanvas" style="z-index: -1; display:block;position: fixed; user-select: none; background-color: bisque;"></canvas>
+    <script src="canvas.js"></script>
+
+    <script>
+        // Load Candidates
+        async function loadCandidates() {
+            const response = await fetch('/admin/candidates');
+            const candidates = await response.json();
+
+            const display = document.getElementById('candidate-display');
+            display.innerHTML = ''; // Clear previous data
+
+            candidates.forEach(candidate => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <div>
+                        <img src="${candidate.symbol}" alt="${candidate.name}" width="50" height="50">
+                        <span>${candidate.name} (${candidate.votes} votes)</span>
+                        <button onclick="deleteCandidate('${candidate._id}')">Delete</button>
+                    </div>
+                `;
+                display.appendChild(li);
+            });
+        }
+
+        // Handle Image Upload
+        document.getElementById('candidate-symbol').addEventListener('change', function () {
+            const file = this.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const img = document.getElementById('image-preview');
+                img.src = e.target.result;
+                img.style.display = 'block';
+            };
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Add Candidate
+        document.getElementById('add-candidate-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById('candidate-name').value;
+            const symbol = document.getElementById('image-preview').src;
+
+            const response = await fetch('/admin/candidate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, symbol }),
+            });
+
+            if (response.ok) {
+                alert('Candidate added successfully!');
+                loadCandidates(); // Refresh list
+            } else {
+                alert('Failed to add candidate.');
+            }
+        });
+
+        // Delete Candidate
+        async function deleteCandidate(id) {
+            const response = await fetch(`/admin/candidate/${id}`, {
+                method: 'DELETE',
+            });
+
+            if (response.ok) {
+                alert('Candidate deleted successfully!');
+                loadCandidates(); // Refresh list
+            } else {
+                alert('Failed to delete candidate.');
+            }
+        }
+
+        // Load Candidates on Page Load
+        document.addEventListener('DOMContentLoaded', loadCandidates);
+    </script>
+</body>
+</html>

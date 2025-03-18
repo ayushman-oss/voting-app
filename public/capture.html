@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capture Photo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        video, canvas, img {
+            width: 100%;
+            max-width: 350px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Capture Photo</h2>
+
+<video id="video" autoplay></video>
+<canvas id="canvas" style="display:none;"></canvas>
+<img id="captured-photo" alt="Captured photo appears here">
+
+<div>
+    <button id="capture-btn">Capture</button>
+    <button id="cancel-btn">Cancel</button>
+</div>
+
+<script>
+const video = document.getElementById('video');
+const canvas = document.getElementById('canvas');
+const capturedPhoto = document.getElementById('captured-photo');
+const captureBtn = document.getElementById('capture-btn');
+const cancelBtn = document.getElementById('cancel-btn');
+
+// ✅ Start Camera
+async function startCamera() {
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.srcObject = stream;
+    } catch (err) {
+        console.error("Error accessing the camera:", err);
+    }
+}
+
+// ✅ Capture Image
+captureBtn.addEventListener('click', () => {
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    const imageDataUrl = canvas.toDataURL('image/jpeg');
+    capturedPhoto.src = imageDataUrl;
+
+    // ✅ Pass the image back to the main window
+    window.opener.postMessage(imageDataUrl, window.location.origin);
+
+    // ✅ Close the modal window
+    window.close();
+});
+
+// ✅ Cancel Capture
+cancelBtn.addEventListener('click', () => {
+    window.close();
+});
+
+// ✅ Start camera when the page loads
+startCamera();
+</script>
+
+</body>
+</html>

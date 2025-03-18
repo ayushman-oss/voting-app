@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="font-family: 'Courier New', Courier, monospace; background-color: bisque;">
+
+    <div class="thankyou-container">
+        <h2 style="background-color: beige; width:100%; text-align: center;">धन्यवाद!</h2>
+        <p style="text-align: center; margin: 20px 0; font-size: 1.2rem;">Thank you for voting. Your response has been recorded successfully.</p>
+        <p style="text-align: center; font-size: 1rem;">Your feedback helps us improve. Have a great day!</p>
+    </div>
+
+    <canvas id="dotCanvas" style="z-index: -1; display:block; position: fixed; user-select: none; background-color: bisque;"></canvas>
+    <script src="canvas.js"></script>
+    <script>
+        history.pushState(null, null, window.location.href);
+        window.addEventListener('popstate', () => {
+        history.pushState(null, null, window.location.href);
+        });
+        </script>
+
+</body>
+</html>

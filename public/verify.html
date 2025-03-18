@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voter Verification</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container-1">
+
+    <h2>Voter Verification</h2>
+    <p>Please enter your details for verification.</p>
+
+    <form id="verification-form">
+  
+        <label for="dob">Date of Birth :
+            <input type="date" value="2007-01-01" id="dob" placeholder="dd-mm-yyyy" min="1950-01-26" max="2007-01-01" required></label>
+        <small id="dob-error" class="error"></small>
+
+        <label for="aadhaar">Aadhaar Number :
+        <input type="text" id="aadhaar" autocomplete="off" placeholder="Enter Aadhaar Number" required maxlength="12"></label>
+        <small id="aadhaar-error" class="error"></small>
+
+        <label for="photo">Capture Photo
+        <button id="capture" type="button" class="btn">Take a Picture</button></label>
+        <img id="photo" src="Ashoka_Chakra.svg"alt="Captured photo appears here"></img>
+
+        <small id="photo-error" class="error"></small>
+
+        <button type="submit" class="btn">Verify</button>
+    </form>
+</div>
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <h2>Capture Photo</h2>
+        <video id="video" width="350vw" autoplay></video>
+        <canvas id="canvas" style="display: none;"></canvas>
+        <div>
+            <button id="capture-btn" class="btn">Capture</button>
+            <button id="cancel-btn" class="btn">Cancel</button>
+        </div>
+    </div>
+</div>
+<canvas id="dotCanvas" style="z-index: -1; display:block;position: fixed; user-select: none; background-color: bisque;"></canvas>
+<script src="canvas.js"></script>
+
+<script src="verify.js"></script>
+</body>
+</html>
