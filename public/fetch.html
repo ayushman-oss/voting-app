@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Location</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="font-family: 'Courier New', Courier, monospace;">
+    <div class="login-container">
+        <h2 style="background-color: beige; width:100%">नमस्ते</h2>       
+        <form id="location-form">
+            <div class="input-group">
+                <select id="state" class="login-input" required>
+                    <option value="" disabled selected>Select State</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <select id="district" class="login-input" required>
+                    <option value="" disabled selected>Select District</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <select id="city" class="login-input" required>
+                    <option value="" disabled selected>Select City</option>
+                </select>
+            </div>
+            <button type="submit">Confirm</button>
+        </form>
+    </div>
+    <script>
+        const stateSelect = document.getElementById("state");
+        const districtSelect = document.getElementById("district");
+        const citySelect = document.getElementById("city");
+
+        const locationData = {
+            "Andhra Pradesh": {
+                "Visakhapatnam": ["Gajuwaka", "Madhurawada"],
+                "Vijayawada": ["Benz Circle", "Krishna Lanka"]
+            },
+            "Maharashtra": {
+                "Mumbai": ["Andheri", "Bandra"],
+                "Pune": ["Shivajinagar", "Hinjewadi"]
+            },
+            "Tamil Nadu": {
+                "Chennai": ["T. Nagar", "Velachery"],
+                "Coimbatore": ["Gandhipuram", "Peelamedu"]
+            }
+        };
+
+        // Populate states
+        Object.keys(locationData).forEach(state => {
+            let option = new Option(state, state);
+            stateSelect.appendChild(option);
+        });
+
+        stateSelect.addEventListener("change", () => {
+            districtSelect.innerHTML = '<option value="" disabled selected>Select District</option>';
+            citySelect.innerHTML = '<option value="" disabled selected>Select City</option>';
+            
+            const selectedState = stateSelect.value;
+            Object.keys(locationData[selectedState] || {}).forEach(district => {
+                let option = new Option(district, district);
+                districtSelect.appendChild(option);
+            });
+        });
+
+        districtSelect.addEventListener("change", () => {
+            citySelect.innerHTML = '<option value="" disabled selected>Select City</option>';
+            
+            const selectedState = stateSelect.value;
+            const selectedDistrict = districtSelect.value;
+            
+            (locationData[selectedState]?.[selectedDistrict] || []).forEach(city => {
+                let option = new Option(city, city);
+                citySelect.appendChild(option);
+            });
+        });
+
+        document.getElementById("location-form").addEventListener("submit", (e) => {
+            e.preventDefault();
+            window.location.href = "scan.html";
+        });
+    </script>
+</body>
+</html>

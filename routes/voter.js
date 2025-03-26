@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Candidate = require("../models/Candidate");
 const User = require('../models/User');
+const mongoose = require('mongoose'); 
+const { ObjectId } = mongoose.Types;
 
 // ✅ Fetch all candidates
 router.get("/candidates", async (req, res) => {
@@ -26,7 +28,7 @@ router.post("/vote/:id", async (req, res) => {
             return res.status(401).json({ error: "Unauthorized. Please log in." });
         }
         
-        const user = await User.findById(userId);
+        const user = await User.findById(new mongoose.Types.ObjectId(userId));
        
 
         if (!user) {
