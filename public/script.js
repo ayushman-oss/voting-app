@@ -21,7 +21,7 @@ document.getElementById("login-form").addEventListener("submit", async function 
         sessionStorage.setItem("userId", data.userId);
         localStorage.setItem("userId", data.userId);
         sessionStorage.setItem("userRole", data.role);  
-        window.location.href = "verify.html";  // Redirect to verification page
+        window.location.href = "fetch.html";  // Redirect to verification page
     } else {
         alert("Invalid username or password!");
     }
@@ -30,3 +30,12 @@ history.pushState(null, null, window.location.href);
 window.addEventListener('popstate', () => {
     history.pushState(null, null, window.location.href);
 });
+
+function myFunction() {
+    var x = document.getElementById("password");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }

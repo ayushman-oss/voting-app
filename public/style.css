@@ -326,16 +326,49 @@ input {
 }
 
 input:focus {
-    border-color: blue; /* Blue border on focus */
-    outline: none; /* Remove the default outline */
+    border-color: blue; 
+    outline: none; 
 }
 
 /* Placeholder Styling */
 input::placeholder {
-    color: #888; /* Dark grey placeholder */
+    color: #888; 
 }
 
-/* Placeholder positioning and style */
 input:focus::placeholder {
-    color: transparent; /* Make the placeholder text transparent when input is focused */
+    color: transparent; 
+}
+
+#location-form {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #dddddd00;
+    border-radius: 8px;
+    background-color: #f9f9f900;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+
+
+.login-input option[value=""] {
+    color: gray;
+    font-style: italic;
+}
+
+
+.login-input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
