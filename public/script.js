@@ -21,7 +21,7 @@ document.getElementById("login-form").addEventListener("submit", async function 
         sessionStorage.setItem("userId", data.userId);
         localStorage.setItem("userId", data.userId);
         sessionStorage.setItem("userRole", data.role);  
-        window.location.href = "fetch.html";  // Redirect to verification page
+        window.location.href = "scan.html";  
     } else {
         alert("Invalid username or password!");
     }

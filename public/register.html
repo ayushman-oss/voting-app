@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Registration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-container">
+    <h2>Registration Form</h2>
+    <form id="registerForm">
+        <input type="text" id="username" placeholder="Username" required><br>
+        <input type="text" id="aadharNo" placeholder="Aadhar Number" required><br>
+        <input type="date" id="dob" placeholder="Date of Birth" max="2007-12-31" required><br>
+        <input type="password" id="password" placeholder="Password" required><br>
+        <input type="password" id="re-password" placeholder="Re-enter Password" required><br>
+        <button type="submit">Register</button>
+        <p id="message"></p>
+    </form>
+    </div>
+
+    <script src="register.js"></script>
+    <canvas id="dotCanvas" style="z-index: -1; display:block;position: fixed; user-select: none; background-color: bisque;"></canvas>
+    <script src="canvas.js"></script>
+</body>
+</html>

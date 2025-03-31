@@ -43,6 +43,7 @@ app.use("/voter", isAuthenticated, voterRoutes);
 app.use("/auth", authRoutes);
 app.use("/voted",voted);
 
+
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

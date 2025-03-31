@@ -45,64 +45,10 @@ cancelBtn.addEventListener('click', () => {
     modal.style.display = 'none';
 });
 
-function generateUniqueID() {
-    return Math.random().toString(36).substr(2, 9).toUpperCase();
-}
-document.getElementById('remote-vote-btn').addEventListener('click', () => {
-    const uniqueID = generateUniqueID();
-    localStorage.setItem('uniqueID', uniqueID);
-    alert(`Your Unique ID: ${uniqueID}`);
-    window.location.href = "vote.html"; // ✅ Redirect after alert
-});
 
-function showVerificationModal() {
-    const uniqueID = generateUniqueID();
-    localStorage.setItem('voteID', uniqueID);
 
-    // Create the main modal
-    const modal = document.createElement('div');
-    modal.id = 'verification-modal';
-    modal.innerHTML = `
-        <div class="modal-content">
-            <h2>Choose an Option</h2>
-            <button id="remote-vote">Go for Remote Voting</button>
-            <button id="location-vote">I am at the Location</button>
-        </div>
-    `;
-    document.body.appendChild(modal);
 
-    document.getElementById('remote-vote').addEventListener('click', () => {
-        alert(`Your Unique Voting ID: ${uniqueID}`);
-        closeModal();
-    });
-    document.getElementById('location-vote').addEventListener('click', () => {
-        showLocationVerificationModal(uniqueID);
-        closeModal();
-    });
-}
-
-function showLocationVerificationModal(uniqueID) {
-    const locationModal = document.createElement('div');
-    locationModal.id = 'location-verification-modal';
-    locationModal.innerHTML = `
-        <div class="modal-content">
-            <h2>Your Unique ID</h2>
-            <p>${uniqueID}</p>
-            <button id="close-modal">Close</button>
-        </div>
-    `;
-    document.body.appendChild(locationModal);
-
-    document.getElementById('close-modal').addEventListener('click', () => {
-        document.body.removeChild(locationModal);
-    });
-}
-function closeModal() {
-    const modal = document.getElementById('verification-modal');
-    if (modal) document.body.removeChild(modal);
-}
-
-document.getElementById('verification-form').addEventListener('submit', (e) => {
+document.getElementById('verification-form').addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const dob = document.getElementById('dob').value.trim();
@@ -137,14 +83,34 @@ document.getElementById('verification-form').addEventListener('submit', (e) => {
     }
 
     if (isValid) {
-        alert("Verification Successful! ✅");
-        const role = localStorage.getItem("userRole");
-        //window.location.href = role === "admin" ? "admin.html" : "vote.html";
-        showVerificationModal();
+        try {
+            const response = await fetch("/auth/updateSession", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ 
+                    aadharNo: aadhaar, 
+                    sessionId: sessionStorage.getItem("sessionId") // Fetching session ID from session storage
+                })
+            });
+    
+            const result = await response.json();
+    
+            if (response.ok && result.success) {
+                alert("Verification Successful! ✅");
+                const role = localStorage.getItem("userRole");
+                window.location.href = role === "admin" ? "admin.html" : "vote.html";
+            } else {
+                alert(`Error: ${result.message}`);
+            }
+        } catch (error) {
+            alert(`Error updating session ID: ${error.message}`);
+        }
     }
 });
 
-// ✅ Allow only numeric input for Aadhaar
+
 document.getElementById('aadhaar').addEventListener('input', function () {
     this.value = this.value.replace(/\D/g, '');
 });

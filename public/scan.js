@@ -14,7 +14,7 @@ document.getElementById('capture').addEventListener('click', () => {
     modal.style.display = 'block';
 
     navigator.mediaDevices.getUserMedia({
-        video: { facingMode: { exact: "environment" } } 
+        video: true //{ facingMode: { exact: "environment" } } 
     })
     .then((stream) => {
         video.srcObject = stream;
@@ -49,7 +49,7 @@ cancelBtn.addEventListener('click', () => {
     modal.style.display = 'none';
 });
 
-// Stop camera stream
+
 function stopCamera() {
     const stream = video.srcObject;
     if (stream) {
@@ -83,10 +83,21 @@ function scanQRCode() {
     const qrCode = jsQR(imageData.data, canvas.width, canvas.height);
 
     if (qrCode) {
-        alert("QR Code Detected: " + qrCode.data);
+        const uid = qrCode.data;
+        if (uid.length === 36) {
+            alert("QR Code Detected: " + uid);           
+            sessionStorage.setItem("sessionId", String(uid));
+            proceedToVerification(); 
+        } else {
+            alert("Invalid UID length! Please scan a valid QR code.");
+        }
     } else {
         alert("No QR code found.");
+        location.reload();
     }
 }
 document.getElementById("proceed").addEventListener("click", scanQRCode);
 
+window.addEventListener('load', () => {
+    sessionStorage.removeItem('sessionId');
+});
