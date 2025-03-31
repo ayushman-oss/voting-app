@@ -14,7 +14,7 @@ document.getElementById('capture').addEventListener('click', () => {
     modal.style.display = 'block';
 
     navigator.mediaDevices.getUserMedia({
-        video: true //{ facingMode: { exact: "environment" } } 
+        video:{ facingMode: { exact: "environment" } } 
     })
     .then((stream) => {
         video.srcObject = stream;

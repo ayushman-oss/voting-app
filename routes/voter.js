@@ -16,50 +16,80 @@ router.get("/candidates", async (req, res) => {
     }
 });
 
+router.post("/verify", async (req, res) => {
+    const { uid } = req.body;
+
+    try {
+        if (!uid) {
+            console.log("No UID provided");
+            return res.status(401).json({ success: false, message: "Unauthorized. Please log in." });
+        }
+
+        // Find the user by UID
+        const user = await User.findOne({ uid });
+        if (!user) {
+            console.log("User not found with provided UID");
+            return res.status(404).json({ success: false, message: "User not found." });
+        }
+
+        // Check if the user has already voted
+        if (user.voted) {
+            console.log("User has already voted");
+            return res.status(403).json({ success: false, message: "You have already voted." });
+        }
+
+        res.json({ success: true, message: "User eligible to vote." });
+    } catch (error) {
+        console.error("Error verifying voter eligibility:", error);
+        res.status(500).json({ success: false, message: "Server error." });
+    }
+});
 // ✅ Increment vote count
 router.post("/vote/:id", async (req, res) => {
     const { id } = req.params;
-    const { userId } = req.body;
 
     try {
-
-        if (!userId) {
-            console.log("No user ID provided");
-            return res.status(401).json({ error: "Unauthorized. Please log in." });
-        }
-        
-        const user = await User.findById(new mongoose.Types.ObjectId(userId));
-       
-
-        if (!user) {
-            console.log("no user found 2nd");
-            return res.status(404).json({ error: "User not found." });
-        }
-
-
-        if (user.voted) {
-            console.log("user found voted");
-            return res.status(403).json({ error: "You have already voted." });
-        }
-
-
+        // Find the candidate by ID
         const candidate = await Candidate.findById(id);
         if (!candidate) {
-            return res.status(404).json({ error: "Candidate not found." });
+            return res.status(404).json({ success: false, message: "Candidate not found." });
         }
 
-        
+        // Increment vote count
         candidate.votes += 1;
         await candidate.save();
 
-        user.voted = true; 
-        await user.save();
-
-        res.json({ message: `Vote recorded for ${candidate.name}`, votes: candidate.votes });
+        res.json({ success: true, message: `Vote recorded for ${candidate.name}`, votes: candidate.votes });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Failed to record vote" });
+        console.error("Error recording vote:", error);
+        res.status(500).json({ success: false, message: "Failed to record vote" });
     }
 });
 
+router.post("/updateVoted", async (req, res) => {
+    const { uid } = req.body;
+
+    try {
+        if (!uid) {
+            console.log("No UID provided");
+            return res.status(400).json({ success: false, message: "Invalid UID" });
+        }
+
+        // Find the user by UID
+        const user = await User.findOne({ uid });
+        if (!user) {
+            console.log("User not found for UID:", uid);
+            return res.status(404).json({ success: false, message: "User not found." });
+        }
+
+        // Update the voted status to true
+        user.voted = true;
+        await user.save();
+
+        res.json({ success: true, message: "Voted status updated successfully!" });
+    } catch (error) {
+        console.error("Error updating voted status:", error);
+        res.status(500).json({ success: false, message: "Server error!" });
+    }
+});
 module.exports = router;
