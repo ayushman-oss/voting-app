@@ -43,9 +43,7 @@ app.use("/voter", isAuthenticated, voterRoutes);
 app.use("/auth", authRoutes);
 app.use("/voted",voted);
 
-
-mongoose.connect(process.env.MONGO_URI, {
-})
+mongoose.connect("mongodb+srv://vercel-admin-user:VBsL0oBMAJiMWhGt@cluster0.mhhb9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {})
   .then(() => console.log("✅ Connected to MongoDB Atlas"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
