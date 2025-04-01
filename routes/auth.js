@@ -6,6 +6,7 @@ const router = express.Router();
 
 // ✅ Register User
 router.post("/register", async (req, res) => {
+  console.log("Register endpoint hit");
   const { username, password, role, aadharNo, dob } = req.body;
 
   if (!username || !password || !role || !aadharNo || !dob) {
@@ -25,33 +26,35 @@ router.post("/register", async (req, res) => {
 
 // ✅ Login User
 router.post("/login", async (req, res) => {
-    const { username, password } = req.body;
-  
-    try {
-      const user = await User.findOne({ username, password });
-      if (!user) {
-        return res.json({ success: false, message: "Invalid credentials!" });
-      }
-  
-      if (user.voted) {
-        return res.status(403).json({ error: "You have already voted." });
-      }
-  
-      const role = user.role;
-      req.session.user = user; 
-      res.json({ success: true,userId:user.username, role });
-    } catch (error) {
-      res.status(500).json({ success: false, message: "Server error!" });
+  console.log("Login endpoint hit");
+  const { username, password } = req.body;
+
+  try {
+    const user = await User.findOne({ username, password });
+    if (!user) {
+      return res.json({ success: false, message: "Invalid credentials!" });
     }
+
+    if (user.voted) {
+      return res.status(403).json({ error: "You have already voted." });
+    }
+
+    const role = user.role;
+    req.session.user = user; 
+    res.json({ success: true, userId: user.username, role });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Server error!" });
+  }
 
 });
 
 router.post("/updateSession", async (req, res) => {
+  console.log("UpdateSession endpoint hit");
   const { aadharNo, sessionId } = req.body;
 
   if (typeof sessionId !== 'string' || sessionId.length !== 36) {
     return res.status(400).json({ success: false, message: "Invalid session ID" });
-}
+  }
 
   try {
       const user = await User.findOne({ aadharNo });
@@ -69,9 +72,10 @@ router.post("/updateSession", async (req, res) => {
 });
 
 router.post("/logout", (req, res) => {
-    req.session.destroy(() => {
-        res.json({ success: true, message: "Logout successful" });
-    });
+  console.log("Logout endpoint hit");
+  req.session.destroy(() => {
+      res.json({ success: true, message: "Logout successful" });
+  });
 });
 
 module.exports = router;
