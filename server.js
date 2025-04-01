@@ -12,6 +12,8 @@ const voted = require("./routes/voted");
 
 const app = express();
 
+
+
 // Middleware
 app.use(cors());
 app.use(bodyParser.json({ limit: "10mb" }));
@@ -33,6 +35,10 @@ app.use("/api/admin", isAuthenticated, adminRoutes);
 app.use("/api/voter", isAuthenticated, voterRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/voted", voted);
+
+app.get("/", (req, res) => {
+  res.sendFile("scan.html", { root: __dirname + "/public" });
+});
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI, {})
