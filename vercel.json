@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "pages/**/*.js",
+      "src": "package.json",   // Points to package.json for Next.js detection
       "use": "@vercel/next"
     },
     {
@@ -27,5 +27,6 @@
       "src": "/",
       "dest": "/public/index.html"
     }
-  ]
+  ],
+
 }
