@@ -2,11 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "package.json",
-      "use": "@vercel/next"
-    },
-    {
-      "src": "api/**/*.js",
+      "src": "server.js",
       "use": "@vercel/node"
     },
     {
@@ -16,8 +12,8 @@
   ],
   "routes": [
     {
-      "src": "/auth/login",
-      "dest": "/auth/login"
+      "src": "/api/(.*)",
+      "dest": "/routes/$1.js"
     },
     {
       "src": "/(.*)",
