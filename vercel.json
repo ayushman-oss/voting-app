@@ -29,12 +29,5 @@
     }
   ],
 
-  "build": {
-    "commands": {
-      "install": "npm install",        
-      "build": "npm run build",         
-      "dev": "npm run dev"             
-    },
-    "outputDirectory": "out"           
-  }
+
 }
