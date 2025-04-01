@@ -1,6 +1,6 @@
 async function loadCandidates() {
     try {
-        const response = await fetch('https://3000-idx-voting-app-1740145835392.cluster-fu5knmr55rd44vy7k7pxk74ams.cloudworkstations.dev/voter/candidates');
+        const response = await fetch('/voter/candidates');
         const candidates = await response.json();
 
         const container = document.getElementById("candidates");
