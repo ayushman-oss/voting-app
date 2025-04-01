@@ -23,7 +23,7 @@ const isAuthenticated = (req, res, next) => {
   if (req.session && req.session.user) {
     next();
   } else {
-    res.redirect("/index.html");
+    res.redirect("/scan.html");
   }
 };
 
