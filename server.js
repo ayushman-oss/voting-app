@@ -4,11 +4,11 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-const adminRoutes = require("./routes/admin");
-const voterRoutes = require("./routes/voter");
-const verifyRoutes = require("./routes/verify");
-const authRoutes = require("./routes/auth");
-const voted = require("./routes/voted");
+const adminRoutes = require("./api/admin");
+const voterRoutes = require("./api/voter");
+const verifyRoutes = require("./api/verify");
+const authRoutes = require("./api/auth");
+const voted = require("./api/voted");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -49,10 +49,10 @@ mongoose.connect(process.env.MONGO_URI, {
   .then(() => console.log("✅ Connected to MongoDB Atlas"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
-const User = require("./models/User");
+  app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+
+  const User = require("./models/User");
 
 
 
 
-
-app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));

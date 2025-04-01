@@ -1,39 +1,59 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const fs = require('fs');
+require("dotenv").config();
+const express = require("express");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+
+const adminRoutes = require("./api/admin");
+const voterRoutes = require("./api/voter");
+const verifyRoutes = require("./api/verify");
+const authRoutes = require("./api/auth");
+const voted = require("./api/voted");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-app.use(bodyParser.json());
-app.use(express.static('public')); // Serve frontend files
+const session = require("express-session");
 
-let votes = { count: 0 };
+app.use(session({
+  secret: process.env.SESSION_SECRET || "mysecret",
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false } 
+}));
 
-// Login API
-app.post('/login', (req, res) => {
-    const { uid, password } = req.body;
-    if (uid === 'admin' && password === 'admin123') {
-        res.json({ role: 'admin' });
-    } else if (uid && password) {
-        res.json({ role: 'user' });
-    } else {
-        res.status(401).json({ error: 'Invalid Credentials' });
+
+app.use(cors());
+app.use(bodyParser.json({limit:"10mb"}));
+app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
+app.use(express.static("public"));
+
+
+const isAuthenticated = (req, res, next) => {
+  if (req.session && req.session.user) {
+    next(); 
+  } else {
+    res.redirect("/index.html"); 
     }
-});
+};
 
-// Vote API (increments count, keeps anonymous)
-app.post('/vote', (req, res) => {
-    votes.count++;
-    fs.writeFileSync('votes.json', JSON.stringify(votes));
-    res.json({ message: 'Vote submitted successfully!' });
-});
+app.use("/verify", verifyRoutes);
+app.use("/admin", isAuthenticated, adminRoutes);
+app.use("/voter", isAuthenticated, voterRoutes);
+app.use("/auth", authRoutes);
+app.use("/voted",voted);
 
-// Get Vote Count API (Admin only)
-app.get('/count', (req, res) => {
-    res.json({ votes: votes.count });
-});
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-});
+mongoose.connect(process.env.MONGO_URI, {
+})
+  .then(() => console.log("✅ Connected to MongoDB Atlas"))
+  .catch((err) => console.error("❌ MongoDB connection error:", err));
+
+const User = require("./models/User");
+
+
+
+
+
+
+module.exports = app;
