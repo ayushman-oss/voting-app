@@ -21,7 +21,7 @@
     },
     {
       "src": "/auth/login",
-      "dest": "/api/auth/login"
+      "dest": "/auth/login"
     },
     {
       "src": "/(.*)",
