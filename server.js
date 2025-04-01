@@ -28,11 +28,11 @@ const isAuthenticated = (req, res, next) => {
 };
 
 // Routes
-app.use("/verify", verifyRoutes);
-app.use("/admin", isAuthenticated, adminRoutes);
-app.use("/voter", isAuthenticated, voterRoutes);
-app.use("/auth", authRoutes);
-app.use("/voted", voted);
+app.use("/api/verify", verifyRoutes);
+app.use("/api/admin", isAuthenticated, adminRoutes);
+app.use("/api/voter", isAuthenticated, voterRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/voted", voted);
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI, {})
