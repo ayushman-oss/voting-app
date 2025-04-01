@@ -20,6 +20,10 @@
       "dest": "/api/$1"
     },
     {
+      "src": "/auth/login",
+      "dest": "/api/auth/login"
+    },
+    {
       "src": "/(.*)",
       "dest": "/public/$1"
     },
