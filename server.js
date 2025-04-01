@@ -19,38 +19,36 @@ app.use(session({
   secret: process.env.SESSION_SECRET || "mysecret",
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: false } 
+  cookie: { secure: process.env.NODE_ENV === "production" }
 }));
-
 
 app.use(cors());
 app.use(bodyParser.json({limit:"10mb"}));
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 app.use(express.static("public"));
 
-
 const isAuthenticated = (req, res, next) => {
   if (req.session && req.session.user) {
     next(); 
   } else {
     res.redirect("/index.html"); 
-    }
+  }
 };
 
 app.use("/verify", verifyRoutes);
 app.use("/admin", isAuthenticated, adminRoutes);
 app.use("/voter", isAuthenticated, voterRoutes);
 app.use("/auth", authRoutes);
-app.use("/voted",voted);
+app.use("/voted", voted);
 
-mongoose.connect("mongodb+srv://vercel-admin-user:VBsL0oBMAJiMWhGt@cluster0.mhhb9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {})
+mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://vercel-admin-user:VBsL0oBMAJiMWhGt@cluster0.mhhb9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {})
   .then(() => console.log("✅ Connected to MongoDB Atlas"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
-const User = require("./models/User");
-
-
-
-
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});
 
 app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
