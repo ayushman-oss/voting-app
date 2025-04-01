@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<style>
+    #qr-code {
+        width: 100%;
+        max-width: 350px;
+        margin-top: 15px;
+    }
+    #timer {
+        margin: 10px 0;
+        font-size: 18px;
+        color: #555;
+    }
+</style>
+
+<div class="container-1">
+    <h2>QR Code Generator</h2>
+    <canvas id="qr-code"></canvas>
+    <p id="timer" style="background-color: beige; padding: 5px; border-radius: 5px;">Expires In: <span id="time-left">15</span></p>
+    <button id="generate-qr" type="submit" class="btn">Generate QR Code Now</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+<script src="generateQR.js"></script>
+<canvas id="dotCanvas" style="z-index: -1; display:block;position: fixed; user-select: none; background-color: bisque;"></canvas>
+<script src="canvas.js"></script>
+</body>
+</html>

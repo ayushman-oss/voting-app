@@ -17,9 +17,13 @@
             </div>
             <div class="input-group">
                 <input type="password" id="password" autocomplete="off" placeholder="Password" required>
+                <input type="checkbox" onclick="myFunction()">
             </div>
             
                 <button type="submit">Enter</button>
+                <button type="submit" onclick="window.location.href='register.html';">Register</button>
+                <button type="submit" onclick="window.location.href='generate_qr.html';">Generate QR Code</button>
+
         </form>
         <p id="message"></p>
         <button id="instructions-btn">❔ Instructions</button>

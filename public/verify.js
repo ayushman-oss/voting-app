@@ -46,7 +46,9 @@ cancelBtn.addEventListener('click', () => {
 });
 
 
-document.getElementById('verification-form').addEventListener('submit', (e) => {
+
+
+document.getElementById('verification-form').addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const dob = document.getElementById('dob').value.trim();
@@ -81,13 +83,34 @@ document.getElementById('verification-form').addEventListener('submit', (e) => {
     }
 
     if (isValid) {
-        alert("Verification Successful! ✅");
-        const role = localStorage.getItem("userRole");
-        window.location.href = role === "admin" ? "admin.html" : "vote.html";
+        try {
+            const response = await fetch("/auth/updateSession", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ 
+                    aadharNo: aadhaar, 
+                    sessionId: sessionStorage.getItem("sessionId") // Fetching session ID from session storage
+                })
+            });
+    
+            const result = await response.json();
+    
+            if (response.ok && result.success) {
+                alert("Verification Successful! ✅");
+                const role = localStorage.getItem("userRole");
+                window.location.href = role === "admin" ? "admin.html" : "vote.html";
+            } else {
+                alert(`Error: ${result.message}`);
+            }
+        } catch (error) {
+            alert(`Error updating session ID: ${error.message}`);
+        }
     }
 });
 
-// ✅ Allow only numeric input for Aadhaar
+
 document.getElementById('aadhaar').addEventListener('input', function () {
     this.value = this.value.replace(/\D/g, '');
 });

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan & Capture</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<style>
+#photo {
+    width: 100%;
+    max-width: 350px; 
+    object-fit: cover;
+    border-radius: 10px;
+}
+.button-container {
+    display: flex;
+    width: 100%;
+    max-width: 350px;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.btn {
+    background-color: #007bff; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 350px;
+    transition: 0.3s;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+.btn:active {
+    transform: scale(0.95);
+}
+</style>
+
+<div class="container-1">
+    <h2>Scan</h2>
+    
+
+        <button id="capture" type="button" class="btn">scan QR code</button>
+        <img id="photo" src="Ashoka_Chakra.svg"alt="Captured photo appears here"></img>
+    
+    
+    <button id="proceed" type="button" class="btn" onclick="proceedToVerification()">Proceed to Verification</button>
+
+</div>
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <h2>Capture Photo</h2>
+        <video id="video" width="350vw" autoplay></video>
+        <canvas id="canvas" style="display: none;"></canvas>
+        <div>
+            <button id="capture-btn" class="btn">Capture</button>
+            <button id="cancel-btn" class="btn">Cancel</button>
+        </div>
+    </div>
+</div>
+<canvas id="dotCanvas" style="z-index: -1; display:block;position: fixed; user-select: none; background-color: bisque;"></canvas>
+<script src="canvas.js"></script>
+
+<script src="scan.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
+</body>
+</html>

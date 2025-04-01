@@ -6,22 +6,21 @@ const router = express.Router();
 
 // ✅ Register User
 router.post("/register", async (req, res) => {
-    const { username, password, role } = req.body;
+  const { username, password, role, aadharNo, dob } = req.body;
 
-    if (!username || !password || !role) {
-        return res.status(400).json({ success: false, message: "All fields are required" });
-    }
+  if (!username || !password || !role || !aadharNo || !dob) {
+      return res.status(400).json({ success: false, message: "All fields are required" });
+  }
 
-    try {
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const user = new User({ username, password: hashedPassword, role });
-        await user.save();
+  try {
+      const user = new User({ username, password, role, aadharNo, dob });
+      await user.save();
 
-        res.status(201).json({ success: true, message: "User registered successfully!" });
-    } catch (err) {
-        console.error("Registration Error:", err);
-        res.status(500).json({ success: false, message: "Internal server error" });
-    }
+      res.status(201).json({ success: true, message: "User registered successfully!" });
+  } catch (err) {
+      console.error("Registration Error:", err);
+      res.status(500).json({ success: false, message: "Internal server error" });
+  }
 });
 
 // ✅ Login User
@@ -45,6 +44,28 @@ router.post("/login", async (req, res) => {
       res.status(500).json({ success: false, message: "Server error!" });
     }
 
+});
+
+router.post("/updateSession", async (req, res) => {
+  const { aadharNo, sessionId } = req.body;
+
+  if (typeof sessionId !== 'string' || sessionId.length !== 36) {
+    return res.status(400).json({ success: false, message: "Invalid session ID" });
+}
+
+  try {
+      const user = await User.findOne({ aadharNo });
+      if (!user) {
+          return res.json({ success: false, message: "User not found!" });
+      }
+
+      user.uid = sessionId;
+      await user.save();
+      res.json({ success: true, message: "Session ID updated successfully!" });
+  } catch (error) {
+      console.error("Error updating session ID:", error);
+      res.status(500).json({ success: false, message: "Server error!" });
+  }
 });
 
 router.post("/logout", (req, res) => {

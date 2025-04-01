@@ -27,30 +27,51 @@ async function submitVote() {
         const candidateId = selected.value;
 
         try {
-            const userId = localStorage.getItem("userId");
-            const response = await fetch(`/voter/vote/${candidateId}`, {
+            const uid = sessionStorage.getItem("sessionId");
+
+            const verifyResponse = await fetch('/voter/verify', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
-                body: JSON.stringify({ userId })
+                body: JSON.stringify({ uid })
             });
 
-            if (response.ok) {
-                alert(`Vote submitted successfully!`);
+            const verifyResult = await verifyResponse.json();
+            if (!verifyResult.success) {
+                alert(`Verification failed: ${verifyResult.message}`);
+                return;
+            }
+
+            const response = await fetch(`/voter/vote/${candidateId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include'
+            });
+
+            const result = await response.json();
+            if (response.ok && result.success) {
+                alert(`Vote submitted successfully for ${candidateId}!`);
                 window.location.href = 'final.html';
+
+                await fetch('/voter/updateVoted', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ uid })
+                });
+
             } else {
-                alert('Failed to submit vote.');
-                //window.location.href = 'index.html';
+                alert(`Failed to submit vote: ${result.message}`);
             }
         } catch (error) {
-            console.error("Error submitting vote:", error);
+            console.log("Error submitting vote:", error);
             alert("Error submitting vote. Please try again.");
-            //window.location.href = 'index.html';
         }
     } else {
         alert("Please select a candidate before submitting.");
     }
 }
+
 
 document.addEventListener("DOMContentLoaded", loadCandidates);
 history.pushState(null, null, window.location.href);
