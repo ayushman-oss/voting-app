@@ -1,5 +1,4 @@
 {
-  "version": 2,
    "framework": "nextjs",
   "builds": [
     {
@@ -11,31 +10,5 @@
       "use": "@vercel/static"
     }
   ],
-  "routes": [
 
-    {
-      "src": "/api/auth/login",
-      "methods": ["POST"],
-      "dest": "/routes/auth.js"
-    },
-    {
-      "src": "/api/vote/(.*)",
-      "methods": ["POST"],
-      "dest": "/routes/vote.js"
-    },
-    {
-      "src": "/api/candidate/(.*)",
-      "methods": ["POST"],
-      "dest": "/routes/candidate.js"
-    },
-    {
-      "src": "/",
-      "dest": "/public/index.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/server.js"
-    }
-
-  ]
 }
