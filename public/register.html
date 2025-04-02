@@ -11,16 +11,20 @@
     <h2>Registration Form</h2>
     <form id="login-form">
         <div class="input-group">
-        <input type="text" id="username" placeholder="Username" required></div>
+        <label for="username> Username:
+        <input type="text" id="username" placeholder="Username" required></label></div>
         <div class="input-group">
-        <input type="text" id="aadharNo" placeholder="Aadhar Number" required></div>
+        <label for="aadhaar">Aadhaar Number :
+        <input type="text" id="aadharNo" placeholder="xxxx-xxxx-xxxx" required></label></div>
         <div class="input-group">
         <label for="dob">Date of Birth :
         <input type="date" id="dob" placeholder="dd-mm-yyyy" min="1900-01-26" max="2007-01-01" required></label></div>
         <div class="input-group">
-        <input type="password" id="password" placeholder="Password" required></div>
+        <label for="Password">Enter a secure password
+        <input type="password" id="password" placeholder="Password" required></label></div>
         <div class="input-group">
-        <input type="password" id="re-password" placeholder="Re-enter Password" required></div>
+        <label for="Password">Re-Enter the same password
+        <input type="password" id="re-password" placeholder="Re-enter Password" required></label></div>
         <div class="input-group">
         <button type="submit">Register</button></div>
         <p id="message"></p>
