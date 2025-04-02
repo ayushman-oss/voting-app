@@ -33,7 +33,8 @@ app.get("/", (req, res) => {
 });
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGO_URI, {})
+mongoose.connect(process.env.MONGO_URI, {ssl: true,connectTimeoutMS: 60000,useNewUrlParser: true,
+  useUnifiedTopology: true,})
   .then(() => console.log("✅ Connected to MongoDB Atlas"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
