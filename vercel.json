@@ -11,10 +11,7 @@
     }
   ],
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/server.js"
-    },
+
 {
       "src": "/api/auth/(.*)",
       "dest": "/routes/auth.js"
@@ -31,9 +28,10 @@
       "src": "/",
       "dest": "/public/index.html"
     },
-    {
-      "src": "/",
-      "dest": "/public/index.html"
-    }
+        {
+      "src": "/(.*)",
+      "dest": "/server.js"
+    },
+
   ]
 }
