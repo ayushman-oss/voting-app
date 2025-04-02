@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 
 module.exports = async (req, res) => {
+  console.log("Incoming request URL in authHandler:", req.url);
   switch (req.url) {
     case "/register": {
       if (req.method === "POST") {
