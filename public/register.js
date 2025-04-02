@@ -1,10 +1,9 @@
-const form = document.getElementById("registerForm");
 const message = document.getElementById("message");
+const submitBtn = document.getElementById("submitBtn");
 
-form.addEventListener("submit", async (e) => {
+submitBtn.addEventListener("click", async (e) => {
     e.preventDefault();
-
-    const username = document.getElementById("username").value;
+        const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
     const rePassword = document.getElementById("re-password").value;
     const aadharNo = document.getElementById("aadharNo").value;
