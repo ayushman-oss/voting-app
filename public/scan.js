@@ -14,7 +14,7 @@ document.getElementById('capture').addEventListener('click', () => {
     modal.style.display = 'block';
 
     navigator.mediaDevices.getUserMedia({
-        video:{ facingMode: { exact: "environment" } } 
+        video:{ facingMode: { ideal: "environment" } } //change ideal -> exact for force use of front camera
     })
     .then((stream) => {
         video.srcObject = stream;
