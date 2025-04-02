@@ -1,4 +1,12 @@
 {
+<<<<<<< HEAD
+  "version": 2,
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/api/index" }
+  ],
+  "public": true
+}
+=======
    "version": 2,
    "framework": "nextjs",
   "builds": [
@@ -39,3 +47,4 @@
  
    ]
  }
+>>>>>>> origin/main
