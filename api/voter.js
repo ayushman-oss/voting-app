@@ -46,10 +46,11 @@ module.exports = async (req, res) => {
     }
 
     // ✅ Increment vote count
-    if (method === 'POST' && req.url.startsWith('/voter/vote/')) {
-        const id = url.split('/').pop();
+    if (method === 'POST' && req.url === '/voter/vote') {
+        const { candidateId } = req.body;
 
         try {
+            const id = candidateId;
             // Find the candidate by ID
             const candidate = await Candidate.findById(id);
             if (!candidate) {

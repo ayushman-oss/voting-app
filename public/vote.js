@@ -42,11 +42,13 @@ async function submitVote() {
                 return;
             }
 
-            const response = await fetch(`/voter/vote/${candidateId}`, {
+            const response = await fetch('/voter/vote', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                credentials: 'include'
+                credentials: 'include',
+                body: JSON.stringify({ candidateId })
             });
+
 
             const result = await response.json();
             if (response.ok && result.success) {
