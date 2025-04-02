@@ -30,7 +30,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/server.js"
+      "dest": "/routes/auth.js"
     }
 
   ]
