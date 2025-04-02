@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
     const { method, url } = req;
 
     // ✅ Fetch all candidates
-    if (method === 'GET' && url === '/candidates') {
+    if (method === 'GET' && req.url === '/voter/candidates') {
         try {
             const candidates = await Candidate.find();
             return res.json(candidates);
