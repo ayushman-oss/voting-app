@@ -68,7 +68,7 @@ module.exports = async (req, res) => {
         }
     }
 
-    if (method === 'POST' && url === '/updateVoted') {
+    if (method === 'POST' && url === '/voter/updateVoted') {
         const { uid } = req.body;
 
         try {
