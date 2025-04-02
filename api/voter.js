@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
         }
     }
 
-    if (method === 'POST' && url === '/verify') {
+    if (method === 'POST' && req.url === '/voter/verify') {
         const { uid } = req.body;
 
         try {
