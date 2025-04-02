@@ -1,7 +1,50 @@
 {
+<<<<<<< HEAD
   "version": 2,
   "rewrites": [
     { "source": "/(.*)", "destination": "/api/index" }
   ],
   "public": true
 }
+=======
+   "version": 2,
+   "framework": "nextjs",
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "public/**/*",
+      "use": "@vercel/static"
+    }
+  ],
+   "routes": [
+ 
+     {
+       "src": "/api/auth/login",
+       "methods": ["POST"],
+       "dest": "/routes/auth.js"
+     },
+     {
+       "src": "/api/vote/(.*)",
+       "methods": ["POST"],
+       "dest": "/routes/vote.js"
+     },
+     {
+       "src": "/api/candidate/(.*)",
+       "methods": ["POST"],
+       "dest": "/routes/candidate.js"
+     },
+     {
+       "src": "/",
+       "dest": "/public/index.html"
+     },
+     {
+       "src": "/(.*)",
+       "dest": "/server.js"
+     }
+ 
+   ]
+ }
+>>>>>>> origin/main

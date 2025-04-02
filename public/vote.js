@@ -1,7 +1,11 @@
 async function loadCandidates() {
     try {
         const response = await fetch('/voter/candidates');
+<<<<<<< HEAD
                 const candidates = await response.json();
+=======
+        const candidates = await response.json();
+>>>>>>> origin/main
 
         const container = document.getElementById("candidates");
         container.innerHTML = ''; 
