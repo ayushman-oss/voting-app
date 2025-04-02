@@ -1,7 +1,6 @@
 const Candidate = require("../models/Candidate");
 const User = require('../models/User');
-const mongoose = require('mongoose'); 
-const { ObjectId } = mongoose.Types;
+
 
 module.exports = async (req, res) => {
     const { method, url } = req;

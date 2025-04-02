@@ -1,11 +1,4 @@
 const Candidate = require('../models/Candidate');
-const mongoose = require('mongoose');
-
-mongoose
-  .connect(process.env.MONGO_URI, {})
-  .then(() => console.log('✅ Connected to MongoDB Atlas'))
-  .catch((err) => console.error('❌ MongoDB connection error:', err));
-
 module.exports = async (req, res) => {
   if (req.method === 'GET' && req.url === '/admin/candidates') {
     try {
