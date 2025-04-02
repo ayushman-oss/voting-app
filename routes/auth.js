@@ -40,7 +40,7 @@ router.post("/login", async (req, res) => {
     }
 
     const role = user.role;
-    req.session.user = user; 
+    //req.session.user = user; 
     res.json({ success: true, userId: user.username, role });
   } catch (error) {
     res.status(500).json({ success: false, message: "Server error!" });
