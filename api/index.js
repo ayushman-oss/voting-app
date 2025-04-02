@@ -12,6 +12,7 @@ mongoose.connect(process.env.MONGO_URI, {})
     .catch((err) => console.error("❌ MongoDB connection error:", err));
 
 module.exports = async (req, res) => {
+  console.log("Incoming request URL:", req.url); // Log the request URL
   const { url } = req;
   if (url.startsWith("/admin")) {
     await adminHandler(req, res);
