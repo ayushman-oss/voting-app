@@ -15,9 +15,25 @@
       "src": "/(.*)",
       "dest": "/server.js"
     },
+{
+      "src": "/api/auth/(.*)",
+      "dest": "/routes/auth.js"
+    },
+    {
+      "src": "/api/vote/(.*)",
+      "dest": "/routes/vote.js"
+    },
+    {
+      "src": "/api/candidate/(.*)",
+      "dest": "/routes/candidate.js"
+    },
     {
       "src": "/",
-      "dest": "/public/sacn.html"
+      "dest": "/public/index.html"
+    },
+    {
+      "src": "/",
+      "dest": "/public/index.html"
     }
   ]
 }
