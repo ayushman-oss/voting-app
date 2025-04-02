@@ -3,6 +3,7 @@ const User = require('../models/User');
 
 
 module.exports = async (req, res) => {
+module.exports = async (req, res) => {
     const { method, url } = req;
 
     // ✅ Fetch all candidates
