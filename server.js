@@ -30,11 +30,11 @@ const isAuthenticated = (req, res, next) => {
 };
 
 // Routes
-app.use("/api/verify", verifyRoutes);
-app.use("/api/admin", isAuthenticated, adminRoutes);
-app.use("/api/voter", isAuthenticated, voterRoutes);
-app.use("/api/auth", authRoutes);
-app.use("/api/voted", voted);
+app.use("/verify", verifyRoutes);
+app.use("/admin", isAuthenticated, adminRoutes);
+app.use("/voter", isAuthenticated, voterRoutes);
+app.use("/auth", authRoutes);
+app.use("/voted", voted);
 
 app.get("/", (req, res) => {
   res.sendFile("scan.html", { root: __dirname + "/public" });
