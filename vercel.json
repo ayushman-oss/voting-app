@@ -12,7 +12,7 @@
   ],
   "routes": [
 
-{
+    {
       "src": "/api/auth/(.*)",
       "dest": "/routes/auth.js"
     },
@@ -25,10 +25,6 @@
       "dest": "/routes/candidate.js"
     },
     {
-      "src": "/",
-      "dest": "/public/index.html"
-    },
-        {
       "src": "/(.*)",
       "dest": "/server.js"
     },
