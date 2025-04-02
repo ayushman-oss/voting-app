@@ -2,8 +2,7 @@
   "version": 2,
   "rewrites": [
     { "source": "/(.*)", "destination": "/api" }
-  ],
-  "public": "public",
+ ],
   "headers": [
     { "source": "/(.*)", "headers": [{"key": "Cache-Control", "value": "max-age=0"}]}
   ]
