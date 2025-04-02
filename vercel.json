@@ -16,10 +16,6 @@
       "src": "/api/auth/(.*)",
       "dest": "/routes/auth.js"
     },
-        {
-      "src": "/api/auth/login",
-      "dest": "/routes/auth.js"
-    },
     {
       "src": "/api/vote/(.*)",
       "dest": "/routes/vote.js"
