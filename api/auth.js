@@ -4,7 +4,7 @@ const User = require("../models/User");
 module.exports = async (req, res) => {
   console.log("Incoming request URL in authHandler:", req.url);
   switch (req.url) {
-    case "/register": {
+    case "/auth/register": {
       if (req.method === "POST") {
         const { username, password, role, aadharNo, dob } = req.body;
         if (!username || !password || !role || !aadharNo || !dob) {
@@ -31,7 +31,7 @@ module.exports = async (req, res) => {
       }
       break;
     }
-    case "/login": {
+    case "/auth/login": {
       if (req.method === "POST") {
         const { username, password } = req.body;
 
@@ -55,7 +55,7 @@ module.exports = async (req, res) => {
       }
       break;
     }
-    case "/updateSession": {
+    case "/auth/updateSession": {
       if (req.method === "POST") {
         const { aadharNo, sessionId } = req.body;
         if (typeof sessionId !== "string" || sessionId.length !== 36) {
