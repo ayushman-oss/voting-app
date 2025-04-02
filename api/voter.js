@@ -46,7 +46,7 @@ module.exports = async (req, res) => {
     }
 
     // ✅ Increment vote count
-    if (method === 'POST' && url.startsWith('/vote/')) {
+    if (method === 'POST' && url.startsWith('/voter/vote')) {
         const id = url.split('/').pop();
 
         try {
@@ -67,7 +67,7 @@ module.exports = async (req, res) => {
         }
     }
 
-    if (method === 'POST' && url === '/updateVoted') {
+    if (method === 'POST' && url === '/voter/updateVoted') {
         const { uid } = req.body;
 
         try {
