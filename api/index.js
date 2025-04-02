@@ -1,28 +1,41 @@
 require("dotenv").config();
-const express = require("express");
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const cors = require("cors");
 
 const adminRoutes = require("./admin");
 const voterRoutes = require("./voter");
 const verifyRoutes = require("./verify");
 const authRoutes = require("./auth");
-const voted = require("./voted");
+const votedRoutes = require("./voted");
 
-const app = express();
+mongoose.connect(process.env.MONGO_URI, {})
+    .then(() => console.log("✅ Connected to MongoDB Atlas"))
+    .catch((err) => console.error("❌ MongoDB connection error:", err));
 
-app.use(cors());
-app.use(bodyParser.json({limit:"10mb"}));
-app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
-app.use(express.static("public"));
-
-
-const isAuthenticated = (req, res, next) => {
-  // In a serverless environment, we can't rely on sessions.
-  // Authentication would typically be handled with JWT or API keys.
-  // For this example, we'll bypass authentication.
-  next();
+module.exports = async (req, res) => {
+    const { method, url } = req;
+    console.log(`Handling ${method} request to ${url}`);
+    // Enable CORS for all requests
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    
+    if (method === 'OPTIONS') {
+        return res.status(200).end();
+    }
+    
+    if (url.startsWith('/api/admin')) {
+        await adminRoutes(req, res);
+    } else if (url.startsWith('/api/voter')) {
+        await voterRoutes(req, res);
+    } else if (url.startsWith('/api/verify')) {
+        await verifyRoutes(req, res);
+    } else if (url.startsWith('/api/auth')) {
+        await authRoutes(req, res);
+    } else if (url.startsWith('/api/voted')) {
+        await votedRoutes(req, res);
+    } else {
+        res.status(404).json({ error: 'Not Found' });
+    }
 };
 
 app.use("/verify", verifyRoutes);
