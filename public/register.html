@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="login-container">
+    <div class="login-container" style="height:100vh">
     <h2>Registration Form</h2>
     <form id="login-form">
         <div class="input-group">
-        <label for="username"> Username:
-        <input type="text" id="username" placeholder="Username" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" required></label></div>
+        <label for="username"> voter ID:
+        <input type="text" id="username" placeholder="voter ID" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" required></label></div>
         <div class="input-group">
         <label for="aadhaar">Aadhaar Number :
         <input type="text" id="aadharNo" placeholder="xxxx-xxxx-xxxx" pattern="\d{4}-\d{4}-\d{4}" maxlength="14" minlength="14" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" required></label></div>
@@ -27,7 +27,7 @@
         <input type="password" id="re-password" placeholder="Re-enter Password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" required></label></div>
         <div class="input-group">
         <button type="submit" id="submitBtn">Register</button></div>
-        <a href="/"><button type="button">Login</button></a>
+        <a href="/"><button type="button" >Login</button></a>
         <p id="message"></p>
     </form>
     </div>
