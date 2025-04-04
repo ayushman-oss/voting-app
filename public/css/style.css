@@ -457,3 +457,27 @@ input:focus::placeholder {
     outline: none;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
+.password-container {
+    position: relative;
+    display: inline-block;
+}
+
+.password-container input[type="password"] {
+    padding-right: 30px; /* Add space for the checkbox */
+}
+
+.password-container input[type="checkbox"] {
+    position: absolute;
+    top: 50%;
+    right: 5px; /* Position checkbox inside the password box */
+    transform: translateY(-50%);
+}
+
+.password-container label {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 10px;
+    font-size: 12px;
+}
