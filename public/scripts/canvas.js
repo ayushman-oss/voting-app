@@ -1,4 +1,4 @@
-const dotcanvas = document.getElementById('dotcanvas');
+const dotcanvas = document.getElementById('dotCanvas');
 const ctx = dotcanvas.getContext('2d');
 
 
