@@ -37,11 +37,11 @@ Welcome to the **Voter Verification & Voting System**, a cutting-edge applicatio
 
 ### 🚶‍♂️ **How It Works**
 
-1. **Arrival & QR Code Scan**  
-   Upon arrival, voters scan a unique **QR code** provided by the voting center.
-
-2. **Login/Registration**  
+1. **Login/Registration**  
    Voters either **log in** with their credentials or **register** if it’s their first time.
+
+2. **Arrival & QR Code Scan**  
+   Upon arrival, voters scan a unique **QR code** provided by the voting center.
 
 3. **Identity Verification**  
    The system verifies the voter using:  
