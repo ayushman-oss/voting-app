@@ -375,6 +375,9 @@ input:focus::placeholder {
     color: gray;
     font-style: italic;
 }
+.hidden {
+    display: none;
+}
 
 
 .login-input:focus {

@@ -26,6 +26,15 @@ document.getElementById("login-form").addEventListener("submit", async function 
         alert("Invalid username or password!");
     }
 });
+
+document.getElementById('language-selector').addEventListener('change', function() {
+    if (this.value) {
+        document.getElementById('welcome-screen').classList.add('hidden');
+        document.getElementById('login-container').classList.remove('hidden');
+    }
+});
+
+
 history.pushState(null, null, window.location.href);
 window.addEventListener('popstate', () => {
     history.pushState(null, null, window.location.href);
