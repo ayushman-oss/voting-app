@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
+    
 </head>
-<body>
+<body style="font-family: 'Courier New', Courier, monospace; ">
     <div id="welcome-screen">
         <div id="welcome-text">Welcome to Neutrino</div>
         <select id="language-selector">
@@ -25,10 +26,9 @@
         </select>
         <button type="button" id="select-language">Select</button>
     </div>
-
     <div class="login-container hidden" id="login-container">
-        <h2>नमस्ते</h2>
-        <form id="login-form">
+        <h2 style="background-color: beige; width:100% ">नमस्ते</h2>       
+        <form id="login-form" >
             <div class="input-group">
 
                 <input type="text" id="username" class="login-input" autocomplete="off" placeholder="User ID" style="margin-top: 10%;" required>
@@ -37,14 +37,60 @@
                 <input type="password" id="password" autocomplete="off" placeholder="Password" required>
                 <input type="checkbox" onclick="myFunction()">
             </div>
-            <button type="submit">Enter</button>
-            <button type="button" onclick="window.location.href='register.html';">Register</button>
-            <button type="button" onclick="window.location.href='generate_qr.html';">Generate QR Code</button>
+            
+                <button type="submit">Enter</button>
+                <button type="submit" onclick="window.location.href='register.html';">Register</button>
+                <button type="submit" onclick="window.location.href='generate_qr.html';">Generate QR Code</button>
 
         </form>
+        <p id="message"></p>
+        <button id="instructions-btn">❔ Instructions</button>
     </div>
-    <canvas id="dotCanvas" style="z-index: -1; display:block; position: fixed; user-select: none; background-color: bisque;"></canvas>
-    <script src="scripts/canvas.js"></script>
-    <script src="scripts/script.js"></script>
+    <canvas id="dotCanvas" style="z-index: -1; display:block;position: fixed; user-select: none; background-color: bisque;"></canvas>
+    <script src="canvas.js"></script>
+    <script src="script.js"></script>
+    <div id="instructions-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-instructions">&times;</span>
+            <h3>Instructions</h3>
+            <p>Check the details properly before enterring</p>
+        </div>
+    </div>
+    <div class="help-box">
+        <button id="help-btn" >help</button>
+        <div class="help-content" id="help-content">
+            <h3>Need Help?</h3>
+            <p>📞 Contact details </p>
+            <p>💡 Common Questions</p>
+        </div>
+    </div>
+    <script>
+        const helpBtn = document.getElementById('help-btn');
+        const helpBox = document.querySelector('.help-box');
+
+        helpBtn.addEventListener('click', () => {
+            helpBox.classList.toggle('active');
+        });
+
+        // Instructions Modal
+        const instructionsBtn = document.getElementById('instructions-btn');
+        const instructionsModal = document.getElementById('instructions-modal');
+        const closeInstructions = document.getElementById('close-instructions');
+
+        instructionsBtn.addEventListener('click', () => {
+            instructionsModal.style.display = 'flex';
+        });
+
+        closeInstructions.addEventListener('click', () => {
+            instructionsModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === instructionsModal) {
+                instructionsModal.style.display = 'none';
+            }
+        });
+    </script>
+    
 </body>
 </html>
