@@ -72,15 +72,15 @@ function scanQRCode() {
     const image = document.getElementById("photo");
     if (!image || !image.complete) return;
 
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
+    const scanCanvas = document.createElement("canvas");
+    const ctx = scanCanvas.getContext("2d");
 
-    canvas.width = image.naturalWidth;
-    canvas.height = image.naturalHeight;
-    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+    scanCanvas.width = image.naturalWidth;
+    scanCanvas.height = image.naturalHeight;
+    ctx.drawImage(image, 0, 0, scanCanvas.width, scanCanvas.height);
 
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    const qrCode = jsQR(imageData.data, canvas.width, canvas.height);
+    const imageData = ctx.getImageData(0, 0, scanCanvas.width, scanCanvas.height);
+    const qrCode = jsQR(imageData.data, scanCanvas.width, scanCanvas.height);
 
     if (qrCode) {
         const uid = qrCode.data;
