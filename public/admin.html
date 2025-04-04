@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -28,8 +28,7 @@
             <ul id="candidate-display"></ul>
         </div>
     </div>
-    <canvas id="dotCanvas" style="z-index: -1; display:block;position: fixed; user-select: none; background-color: bisque;"></canvas>
-    <script src="canvas.js"></script>
+    <canvas id="dotCanvas" style="z-index: -1; display:block;position: fixed; user-select: none; background-color: bisque;"></canvas>    
 
     <script>
         // Load Candidates
@@ -107,7 +106,8 @@
         }
 
         // Load Candidates on Page Load
-        document.addEventListener('DOMContentLoaded', loadCandidates);
+        document.addEventListener('DOMContentLoaded', loadCandidates);    
     </script>
+    <script src="scripts/canvas.js"></script>
 </body>
 </html>

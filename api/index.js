@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'https://voting-i27hehsy1-aykens-projects.vercel.app');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  console.log("Incoming request URL:", req.url); // Log the request URL
+  console.log("Incoming request URL:", req.url); 
   const { url, method } = req;
   if (method === 'POST' && url === '/voter/verify') {
       await voterHandler(req, res);

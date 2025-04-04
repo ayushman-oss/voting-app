@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vote</title>
-    <!--<link rel="stylesheet" href="style.css" />-->
+    <link rel="stylesheet" href="css/style.css" />
     <style>
         * {
         box-sizing: border-box;
@@ -159,13 +159,12 @@
         cursor: not-allowed;
     }
     </style>
-    <script src="vote.js" defer></script>
 </head>
 <body>
     <h1>Vote</h1>
     <div class="form-container">
         <form id="voteForm">
-            <div id="candidates" class="candidates-list"></div>
+            <div id="candidates" class="candidates-list"></div> 
             <button type="button" onclick="submitVote()" class="submit-btn">
                 Submit Vote
             </button>
@@ -173,5 +172,6 @@
     </div>
     <canvas id="dotCanvas" style="z-index: -1; display:block;position: fixed; user-select: none; background-color: bisque;"></canvas>
     <script src="canvas.js"></script>
+    <script src="scripts/vote.js" defer></script>
 </body>
 </html>

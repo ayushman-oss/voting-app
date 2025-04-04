@@ -238,12 +238,12 @@ ul li {
     margin-top: 10px;
 }
 
-/* Expand Help Content */
+
 .help-box.active .help-content {
     display: block;
 }
 
-/* Media Queries for Responsiveness */
+
 @media (max-width: 768px) {
     .login-container, .container, .admin-container {
         width: 95%; 
@@ -271,26 +271,26 @@ ul li {
 
     .login-container {
         padding: 15px;
-        height: auto; /* Allow height to adjust dynamically */
+        height: auto; 
     }
 
     .help-box {
-        bottom: 10px; /* Move help box up a bit */
+        bottom: 10px; 
         right: 10px;
     }
 
     .container, .admin-container {
-        width: 100%; /* Ensure container elements take up the full width on very small screens */
+        width: 100%; 
         padding: 10px;
     }
 
     input, button {
-        padding: 12px; /* Increase padding for better touch interactions on mobile */
+        padding: 12px; 
         font-size: 16px;
     }
 
     .preview {
-        width: 100px; /* Reduce image size for smaller screens */
+        width: 100px; 
         height: 100px;
     }
 }
