@@ -1,80 +1,104 @@
-const dotcanvas = document.getElementById('dotCanvas');
-const ctx = dotcanvas.getContext('2d');
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
 
-dotcanvas.width = window.innerWidth;
-dotcanvas.height = window.innerHeight;
 
-const colors = ['#ff9933', '#ffffff', '#138808']; 
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+const lim=canvas.height<canvas.width ? canvas.height : canvas.width;
+
 const dots = [];
-
-class Dot {
-  constructor(x, y, color) {
-    this.x = x;
-    this.y = y;
-    this.color = color; 
-    this.size = Math.random() * 2 + 1; 
-    this.life = Math.random() * 0.1 + 40; 
-    this.speedX = (Math.random() - 0.5) * 10; 
-    this.speedY = (Math.random() - 0.5) * 40;
-  }
-
-  update() {
-    this.x += this.speedX;
-    this.y += this.speedY;
-    this.life--; 
-  }
-
-  draw() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fillStyle = this.color;
-    ctx.fill();
-  }
+const numDots = lim*0.2;
+	class Dot {
+constructor() {
+  this.x = Math.random() * canvas.width;
+  this.y = Math.random() * canvas.height;
+  this.radius = Math.random()*lim*0.006;
+  this.velocity = {
+    x: (Math.random() - 0.5) * 1.8,
+    y: (Math.random() - 0.5) * 1.8
+  };
 }
 
-function addDot() {
-  // Only add a dot if there are fewer than 780
-  if (dots.length < 780) {
-    const x = Math.random() * dotcanvas.width;
-    const y = Math.random() * dotcanvas.height;
-    const color = colors[Math.floor(Math.random() * colors.length)];
-    dots.push(new Dot(x, y, color));
-  }
+draw() {
+  ctx.beginPath();
+  ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+  ctx.fillStyle = 'grey';
+  ctx.fill();
 }
 
-function removeDot() {
-  // Remove a dot if there are more than 780
-  if (dots.length > 780) {
-    dots.shift(); // Remove the first dot (you could also randomly remove a dot if you'd prefer)
+update() {
+  this.draw();
+
+  for (let i = 0; i < dots.length; i++) {
+      if (this === dots[i]) continue;
+      const distance = Math.sqrt(Math.pow(this.x - dots[i].x, 2) + Math.pow(this.y - dots[i].y, 2));
+      
+      if (distance < lim*0.1+Math.random()*0.09) {
+          ctx.beginPath();
+          ctx.moveTo(this.x, this.y);
+          ctx.lineTo(dots[i].x, dots[i].y);
+          ctx.strokeStyle = 'grey';
+          ctx.lineWidth = Math.random()*0.1+canvas.height*0.0005;
+          ctx.stroke();
+      }
+      if (distance < lim*0.01) {
+          // Randomly deflect or attract
+          const randomness = Math.random() * 0.02 - 0.01;
+          this.velocity.x += (dots[i].x - this.x) * randomness;
+          this.velocity.y += (dots[i].y - this.y) * randomness;
+      }
+      }
+
+  // Random speed change upon collision with the walls
+  if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
+    this.velocity.x = Math.random() * 2 - 1;
   }
+
+  if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
+    this.velocity.y = Math.random() * 2 - 1;
+  }
+
+  this.x += this.velocity.x;
+  this.y += this.velocity.y;
+}
 }
 
-function animate() { 
-  ctx.clearRect(0, 0, dotcanvas.width, dotcanvas.height);
+function init() {
+for (let i = 0; i < numDots; i++) {
+  dots.push(new Dot());
+}
+}
 
-  // Add a dot with some probability, but ensure the number of dots stays between 28 and 780
-  if (Math.random() < 0.1 && dots.length < 780) addDot(); 
-  
-  // Ensure the dots array stays within bounds (28 to 780)
-  if (dots.length > 780) removeDot();
-  if (dots.length < 28) addDot(); // Ensure at least 28 dots at all times
-
-  for (let i = dots.length - 1; i >= 0; i--) {
-    const dot = dots[i];
-    dot.update();
-    dot.draw();
-
-    if (dot.life <= 0) {
-      dots.splice(i, 1);  // Remove dots when their life ends
+function deleteCloseDots() {
+for (let i = 0; i < dots.length; i++) {
+  for (let j = i + 1; j < dots.length; j++) {
+    const distance = Math.sqrt(Math.pow(dots[i].x - dots[j].x, 2) + Math.pow(dots[i].y - dots[j].y, 2));
+    if (distance < lim*0.008) {
+      dots.splice(j, 1);
+      j--; // Adjust index after removal
     }
   }
-
-  requestAnimationFrame(animate);
+}
 }
 
-window.addEventListener('resize', () => {
-  dotcanvas.width = window.innerWidth;
-  dotcanvas.height = window.innerHeight;
-});
+function animate() {
+requestAnimationFrame(animate);
+ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+for (let i = 0; i < dots.length; i++) {
+  dots[i].update();
+}
+
+deleteCloseDots();
+
+while (dots.length < numDots) {
+  const newDot = new Dot();
+  newDot.velocity = {
+    x: (Math.random() - 0.5) * 2,
+    y: (Math.random() - 0.5) * 2
+  };
+  dots.push(newDot);
+}
+}
+init();
 animate();
