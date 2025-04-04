@@ -277,22 +277,24 @@ ul li {
 }
 
 #language-selector {
-    width: 50%;
-    max-width: 786px;
-    padding: 10px;
+    width: 60%; 
+    max-width: 768px; 
+    padding: 12px; 
     margin: 10px 0;
     font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    border-radius: 6px;
+    border: none; 
+    background-color: #000000; 
+    color: white; 
+    cursor: pointer;
     transition: all 0.3s ease;
     box-sizing: border-box; 
 }
 
 #language-selector:focus {
     outline: none;
-    border-color: #007bff;
+    border-color: #007bff; 
 }
-
 
 #select-language:hover {
     background-color: #0056b3;
@@ -321,8 +323,9 @@ ul li {
         font-size: 1.5rem;
     }
     #language-selector {
+        width: 80%; 
         font-size: 14px; 
-        padding: 7px; 
+        padding: 10px; 
     }
 }
 
@@ -358,8 +361,9 @@ ul li {
         height: 100px;
     }
     #language-selector {
+        width: 90%; 
         font-size: 12px; 
-        padding: 6px; 
+        padding: 8px;
     }
     #welcome-text {
         font-size: 1rem;
