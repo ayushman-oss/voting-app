@@ -32,7 +32,8 @@ document.getElementById('select-language').addEventListener('click', function() 
     var selectedLanguage = languageSelector.value;
     
     if (selectedLanguage) {
-        document.getElementById('welcome-screen').classList.add('hidden');
+        var welcomeScreen = document.getElementById('welcome-screen')
+        welcomeScreen.classList.add('hidden');
         var loginContainer = document.getElementById('login-container');
         loginContainer.classList.remove('hidden');
 
