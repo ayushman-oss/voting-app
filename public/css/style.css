@@ -261,7 +261,7 @@ ul li {
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    background-color: whitesmoke;
+    background-color: beige;
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 
@@ -285,6 +285,7 @@ ul li {
     border-radius: 5px;
     border: 1px solid #ccc;
     transition: all 0.3s ease;
+    box-sizing: border-box; 
 }
 
 #language-selector:focus {
@@ -319,6 +320,10 @@ ul li {
     #welcome-text {
         font-size: 2.5rem;
     }
+    #language-selector {
+        font-size: 13px; 
+        padding: 7px; 
+    }
 }
 
 @media (max-width: 480px) {
@@ -351,6 +356,10 @@ ul li {
     .preview {
         width: 100px; 
         height: 100px;
+    }
+    #language-selector {
+        font-size: 12px; 
+        padding: 6px; 
     }
 }
 .error {
