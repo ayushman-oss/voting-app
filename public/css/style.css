@@ -263,7 +263,7 @@ ul li {
     max-width: 400px;
     margin: 0 auto;
     text-align: center;
-    box-shadow: 0 0 60px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 60px 25px rgba(0, 0, 0, 0.9);
 }
 
 #welcome-text {
