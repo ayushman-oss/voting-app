@@ -2,8 +2,8 @@ const canvas = document.getElementById('dotCanvas');
 const ctx = canvas.getContext('2d');
 
 
-canvas.width = window.innerWidth+window.innerHeight;
-canvas.height = window.innerHeight+window.innerWidth;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 const lim=canvas.height<canvas.width ? canvas.height : canvas.width;
 
 const dots = [];
