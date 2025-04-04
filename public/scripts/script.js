@@ -27,13 +27,52 @@ document.getElementById("login-form").addEventListener("submit", async function 
     }
 });
 
-document.getElementById('language-selector').addEventListener('change', function() {
-    if (this.value) {
+document.querySelectorAll('.language-option').forEach(button => {
+    button.addEventListener('click', function () {
         document.getElementById('welcome-screen').classList.add('hidden');
         document.getElementById('login-container').classList.remove('hidden');
-    }
-});
 
+        var selectedLanguage = this.dataset.language;
+        var greeting = "";
+        switch (selectedLanguage) {
+            case "English":
+                greeting = "Hello";
+                break;
+            case "Hindi":
+                greeting = "नमस्ते";
+                break;
+            case "Bengali":
+                greeting = "নমস্কার";
+                break;
+            case "Telugu":
+                greeting = "నమస్కారం";
+                break;
+            case "Tamil":
+                greeting = "வணக்கம்";
+                break;
+            case "Marathi":
+                greeting = "नमस्कार";
+                break;
+            case "Urdu":
+                greeting = "آداب";
+                break;
+            case "Gujarati":
+                greeting = "નમસ્તે";
+                break;
+            case "Kannada":
+                greeting = "ನಮಸ್ಕಾರ";
+                break;
+            case "Odia":
+                greeting = "ନମସ୍କାର";
+                break;
+            case "Punjabi":
+                greeting = "ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ";
+                break;
+        }
+
+        document.querySelector('.login-container h2').textContent = greeting;
+    });
+});
 
 history.pushState(null, null, window.location.href);
 window.addEventListener('popstate', () => {
