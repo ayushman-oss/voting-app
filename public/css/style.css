@@ -71,6 +71,17 @@ button[type="button"] {
     cursor: pointer;
     transition: background 0.3s ease;
 }
+button[type="button"] {
+    background: #000000;
+    color: white;
+    padding: 12px;
+    max-width: 768px;
+    width: 60%;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
 
 button:hover {
     background-color: #0056b3;
