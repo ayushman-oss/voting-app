@@ -457,38 +457,3 @@ input:focus::placeholder {
     outline: none;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
-
-.password-container {
-    position: relative;
-    width: 100%;
-}
-
-
-.password-container input[type="password"] {
-    width: 100%; 
-    padding: 12px;
-    padding-right: 35px; 
-    border-radius: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    background-color: beige; 
-}
-
-.password-container input[type="checkbox"] {
-    position: absolute;
-    top: 50%;
-    right: 10px; 
-    transform: translateY(-50%);
-    width: auto;
-    height: auto;
-}
-
-.password-container label {
-    position: absolute;
-    right: 30px; 
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 12px;
-    margin-left: 10px;
-    cursor: pointer;
-}
