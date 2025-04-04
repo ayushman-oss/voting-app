@@ -27,38 +27,41 @@ document.getElementById("login-form").addEventListener("submit", async function 
     }
 });
 
-document.querySelectorAll('.language-option').forEach(button => {
-    button.addEventListener('click', function () {
+document.getElementById('select-language').addEventListener('click', function() {
+    var languageSelector = document.getElementById('language-selector');
+    var selectedLanguage = languageSelector.value;
+    
+    if (selectedLanguage) {
         document.getElementById('welcome-screen').classList.add('hidden');
-        document.getElementById('login-container').classList.remove('hidden');
+        var loginContainer = document.getElementById('login-container');
+        loginContainer.classList.remove('hidden');
 
-        var selectedLanguage = this.dataset.language;
         var greeting = "";
         switch (selectedLanguage) {
-            case "English":
+            case "English": 
                 greeting = "Hello";
                 break;
-            case "Hindi":
+            case "Hindi":   
                 greeting = "नमस्ते";
                 break;
-            case "Bengali":
+            case "Bengali":  
                 greeting = "নমস্কার";
                 break;
-            case "Telugu":
+            case "Telugu":  
                 greeting = "నమస్కారం";
                 break;
-            case "Tamil":
+            case "Tamil":   
                 greeting = "வணக்கம்";
                 break;
-            case "Marathi":
+            case "Marathi":  
                 greeting = "नमस्कार";
                 break;
-            case "Urdu":
+            case "Urdu":   
                 greeting = "آداب";
                 break;
             case "Gujarati":
                 greeting = "નમસ્તે";
-                break;
+                break; 
             case "Kannada":
                 greeting = "ನಮಸ್ಕಾರ";
                 break;
@@ -68,10 +71,10 @@ document.querySelectorAll('.language-option').forEach(button => {
             case "Punjabi":
                 greeting = "ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ";
                 break;
-        }
+        } 
 
         document.querySelector('.login-container h2').textContent = greeting;
-    });
+    }
 });
 
 history.pushState(null, null, window.location.href);

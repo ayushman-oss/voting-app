@@ -254,6 +254,7 @@ ul li {
 #welcome-text {
     font-size: 3rem;
     margin-bottom: 20px;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 #select-language {
@@ -268,7 +269,7 @@ ul li {
 
 .help-box.active .help-content {
     display: block;
-}
+}}
 
 
 @media (max-width: 768px) {
