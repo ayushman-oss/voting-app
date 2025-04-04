@@ -4,27 +4,27 @@ const dotcanvas = document.getElementById('dotCanvas');
     dotcanvas.width = window.innerWidth;
     dotcanvas.height = window.innerHeight;
 
-    const colors = ['#ff9933', '#ffffff', '#138808']; // Orange, White, Green
+    const colors = ['#ff9933', '#ffffff', '#138808']; 
     const dots = [];
 
     class Dot {
       constructor(x, y, color) {
         this.x = x;
         this.y = y;
-        this.color = color;
-        this.size = Math.random() * 5 + 2; 
-        this.life = Math.random() * 80 + 40;
-        this.speedX = (Math.random() - 0.5) * 0.8; 
-        this.speedY = (Math.random() - 0.5) * 0.8;
+        this.color = color; // Dot color
+        this.size = Math.random() * 2 + 1; 
+        this.life = Math.random() * 500 + 250; 
+        this.speedX = (Math.random() - 0.5) * 0.005; 
+        this.speedY = (Math.random() - 0.5) * 0.005;
       }
 
       update() {
         this.x += this.speedX;
         this.y += this.speedY;
-        this.life--;
+        this.life--; // Decrease life
       }
 
-      draw() {
+      draw() { // Draw the dot
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fillStyle = this.color;
@@ -39,16 +39,13 @@ const dotcanvas = document.getElementById('dotCanvas');
       dots.push(new Dot(x, y, color));
     }
 
-    function animate() {
+    function animate() { 
       ctx.clearRect(0, 0, dotcanvas.width, dotcanvas.height);
 
-      for (let i = 0; i < 5; i++) {
-        addDot();
-      }
+      if (Math.random() < 0.1) addDot(); 
 
       for (let i = dots.length - 1; i >= 0; i--) {
         const dot = dots[i];
-        dot.update();
         dot.draw();
 
   
