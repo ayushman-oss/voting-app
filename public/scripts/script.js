@@ -27,55 +27,38 @@ document.getElementById("login-form").addEventListener("submit", async function 
     }
 });
 
-document.getElementById('select-language').addEventListener('click', function() {
-    var languageSelector = document.getElementById('language-selector');
-    var selectedLanguage = languageSelector.value;
-    
-    if (selectedLanguage) {
-        var welcomeScreen = document.getElementById('welcome-screen')
-        welcomeScreen.classList.add('hidden');
-        var loginContainer = document.getElementById('login-container');
-        loginContainer.classList.remove('hidden');
+document.getElementById('select-language').addEventListener('click', function () {
+    var language = document.getElementById('language-selector').value;
+    var greeting = "";
 
-        var greeting = "";
-        switch (selectedLanguage) {
-            case "English": 
-                greeting = "Hello";
-                break;
-            case "Hindi":   
-                greeting = "नमस्ते";
-                break;
-            case "Bengali":  
-                greeting = "নমস্কার";
-                break;
-            case "Telugu":  
-                greeting = "నమస్కారం";
-                break;
-            case "Tamil":   
-                greeting = "வணக்கம்";
-                break;
-            case "Marathi":  
-                greeting = "नमस्कार";
-                break;
-            case "Urdu":   
-                greeting = "آداب";
-                break;
-            case "Gujarati":
-                greeting = "નમસ્તે";
-                break; 
-            case "Kannada":
-                greeting = "ನಮಸ್ಕಾರ";
-                break;
-            case "Odia":
-                greeting = "ନମସ୍କାର";
-                break;
-            case "Punjabi":
-                greeting = "ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ";
-                break;
-        } 
-
-        document.querySelector('.login-container h2').textContent = greeting;
+    switch (language) {
+        case "English": greeting = "Hello"; break;
+        case "Hindi": greeting = "नमस्ते"; break;
+        case "Bengali": greeting = "নমস্কার"; break;
+        case "Telugu": greeting = "నమస్కారం"; break;
+        case "Tamil": greeting = "வணக்கம்"; break;
+        case "Marathi": greeting = "नमस्कार"; break;
+        case "Urdu": greeting = "آداب"; break;
+        case "Gujarati": greeting = "નમસ્તે"; break;
+        case "Kannada": greeting = "ನಮಸ್ಕಾರ"; break;
+        case "Odia": greeting = "ନମସ୍କାର"; break;
+        case "Punjabi": greeting = "ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ"; break;
+        default: greeting = "नमस्ते"; 
     }
+
+    document.querySelector('.login-container h2').textContent = greeting;
+
+    const welcomeScreen = document.getElementById('welcome-screen');
+    if (welcomeScreen) {
+        welcomeScreen.remove();
+    }
+
+    const loginContainer = document.getElementById('login-container');
+    if (loginContainer) {
+        loginContainer.classList.remove('hidden');
+        loginContainer.style.display = 'block';
+    }
+
 });
 
 history.pushState(null, null, window.location.href);
