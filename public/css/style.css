@@ -71,7 +71,7 @@ button[type="button"] {
     cursor: pointer;
     transition: background 0.3s ease;
 }
-button[type="button"] {
+button[type="button-language"] {
     background: #000000;
     color: white;
     padding: 12px;
@@ -264,17 +264,13 @@ ul li {
     margin: 0 auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.7);
 }
 
 #welcome-text {
     font-size: 3rem;
     margin-bottom: 20px;
     font-family: 'Courier New', Courier, monospace;
-}
-
-#select-language {
-    padding: 10px;
-    font-size: 1.2rem;
 }
 
 #language-selector {
