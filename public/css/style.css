@@ -251,7 +251,7 @@ ul li {
 
 /* Welcome Screen Styling */
 #welcome-screen {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -262,7 +262,6 @@ ul li {
     justify-content: center;
     z-index: 1000;
     background-color: beige;
-    padding: 2rem;
     border-radius: 10px;
     box-shadow: 
         0 0 60px 25px rgba(0, 0, 0, 0.9), 
@@ -319,10 +318,10 @@ ul li {
         padding: 15px;
     }
     #welcome-text {
-        font-size: 2.5rem;
+        font-size: 1.5rem;
     }
     #language-selector {
-        font-size: 13px; 
+        font-size: 14px; 
         padding: 7px; 
     }
 }
@@ -361,6 +360,9 @@ ul li {
     #language-selector {
         font-size: 12px; 
         padding: 6px; 
+    }
+    #welcome-text {
+        font-size: 1rem;
     }
 }
 .error {

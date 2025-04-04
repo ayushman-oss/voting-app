@@ -11,17 +11,17 @@ const dotcanvas = document.getElementById('dotCanvas');
       constructor(x, y, color) {
         this.x = x;
         this.y = y;
-        this.color = color; // Dot color
+        this.color = color; 
         this.size = Math.random() * 2 + 1; 
-        this.life = Math.random() * 500 + 250; 
-        this.speedX = (Math.random() - 0.5) * 0.005; 
-        this.speedY = (Math.random() - 0.5) * 0.005;
+        this.life = Math.random() * 0.1+40; 
+        this.speedX = (Math.random() - 0.5) * 0.1; 
+        this.speedY = (Math.random() - 0.5) * 0.4;
       }
 
       update() {
         this.x += this.speedX;
         this.y += this.speedY;
-        this.life--; // Decrease life
+        this.life--; 
       }
 
       draw() { // Draw the dot
