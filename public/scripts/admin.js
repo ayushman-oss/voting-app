@@ -1,46 +1,76 @@
-const express = require("express");
-const router = express.Router();
-const Candidate = require("../models/Candidate");
+ // Load Candidates
+ async function loadCandidates() {
+    const response = await fetch('/admin/candidates');
+    const candidates = await response.json();
 
-// Get Candidates
-router.get("/candidates", async (req, res) => {
-    try {
-        const candidates = await Candidate.find();
-        res.json(candidates);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
+    const display = document.getElementById('candidate-display');
+    display.innerHTML = ''; // Clear previous data
+
+    candidates.forEach(candidate => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <div>
+                <img src="${candidate.symbol}" alt="${candidate.name}" width="50" height="50">
+                <span>${candidate.name} (${candidate.votes} votes)</span>
+                <button onclick="deleteCandidate('${candidate._id}')">Delete</button>
+            </div>
+        `;
+        display.appendChild(li);
+    });
+}
+
+// Handle Image Upload
+document.getElementById('candidate-symbol').addEventListener('change', function () {
+    const file = this.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+        const img = document.getElementById('image-preview');
+        img.src = e.target.result;
+        img.style.display = 'block';
+    };
+
+    if (file) {
+        reader.readAsDataURL(file);
     }
 });
 
 // Add Candidate
-router.post("/candidate", async (req, res) => {
-    const { name, symbol } = req.body;
+document.getElementById('add-candidate-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
 
-    if (!name || !symbol) {
-        return res.status(400).json({ error: "All fields are required." });
-    }
+    const name = document.getElementById('candidate-name').value;
+    const symbol = document.getElementById('image-preview').src;
 
-    try {
-        const newCandidate = new Candidate({ name, symbol, votes: 0 });
-        await newCandidate.save();
-        res.status(201).json(newCandidate);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
+    const response = await fetch('/admin/candidate', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, symbol }),
+    });
+
+    if (response.ok) {
+        alert('Candidate added successfully!');
+        loadCandidates(); // Refresh list
+    } else {
+        alert('Failed to add candidate.');
     }
 });
 
 // Delete Candidate
-router.delete("/candidate/:id", async (req, res) => {
-    try {
-        await Candidate.findByIdAndDelete(req.params.id);
-        res.status(200).json({ message: "Candidate deleted." });
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
+async function deleteCandidate(id) {
+    const response = await fetch(`/admin/candidate/${id}`, {
+        method: 'DELETE',
+    });
 
-module.exports = router;
-history.pushState(null, null, window.location.href);
-window.addEventListener('popstate', () => {
-    history.pushState(null, null, window.location.href);
-});
+    if (response.ok) {
+        alert('Candidate deleted successfully!');
+        loadCandidates(); // Refresh list
+    } else {
+        alert('Failed to delete candidate.');
+    }
+}
+
+// Load Candidates on Page Load
+document.addEventListener('DOMContentLoaded', loadCandidates);  
