@@ -12,7 +12,7 @@
             <div>
                 <img src="${candidate.symbol}" alt="${candidate.name}" width="50" height="50">
                 <span>${candidate.name} (${candidate.votes} votes)</span>
-                <button onclick="deleteCandidate('${candidate._id}')">Delete</button>
+                <button type="button" onclick="deleteCandidate('${candidate._id}')">Delete</button>
             </div>
         `;
         display.appendChild(li);
